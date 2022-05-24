@@ -6,7 +6,10 @@ const FORM_KEY = 'feedback-form-state';
 form.addEventListener('input', throttle(onInputForm, 500));
 form.addEventListener('submit', onSubmitForm);
 
-const dataForm = {};
+const dataForm = {
+  email: '',
+  message: '',
+};
 
 onFormShow();
 
