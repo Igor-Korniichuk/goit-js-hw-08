@@ -19,10 +19,16 @@ function onInputForm (event) {
 }
 
 function onSubmitForm(event) {
-    event.preventDefault();
+  event.preventDefault();
+  
+    if (form.elements.email.value === '' || form.elements.message.value === '') {
+    return window.alert("Все поля должны быть заполнены!");
+  }
     console.log(JSON.parse(localStorage.getItem(FORM_KEY)));    
     event.currentTarget.reset();
     localStorage.removeItem(FORM_KEY);
+  
+  
 }
 
 function onFormShow() {  
