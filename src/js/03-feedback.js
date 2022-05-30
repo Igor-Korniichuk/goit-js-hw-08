@@ -6,10 +6,7 @@ const FORM_KEY = 'feedback-form-state';
 form.addEventListener('input', throttle(onInputForm, 500));
 form.addEventListener('submit', onSubmitForm);
 
-const dataForm = {
-  email: '',
-  message: '',
-};
+const dataForm = {};
 
 onFormShow();
 
@@ -19,7 +16,7 @@ function onInputForm (event) {
 }
 
 function onSubmitForm(event) {
-  event.preventDefault();
+  event.preventDefault();  
   
     if (form.elements.email.value === '' || form.elements.message.value === '') {
     return window.alert("Все поля должны быть заполнены!");
@@ -31,10 +28,17 @@ function onSubmitForm(event) {
   
 }
 
-function onFormShow() {  
+function onFormShow() {
+
   if (localStorage.getItem(FORM_KEY)) {
-    const data = JSON.parse(localStorage.getItem(FORM_KEY));
-    form.elements.email.value = data.email
-    form.elements.message.value = data.message
+    const formObjectValue = JSON.parse(localStorage.getItem(FORM_KEY));
+
+    for (const key in formObjectValue) {
+      dataForm[key] = formObjectValue[key];
+    }
+
+    form.elements.email.value = dataForm.email ? dataForm['email'] : '';
+    form.elements.message.value = dataForm.message  ? dataForm['message'] : '';
   }
 }
+
